@@ -169,6 +169,13 @@ class GRU(Layer):
         if return_sequences:
             (nb_samples, max_sample_length, output_dim)
 
+        the transition function is:
+
+            r = f( x * W_r + h_ * U_r )
+            z = f( x * W_z + h_ * U_z )
+            h~ = f( x * W_h + (r \dot h_) * U_h )
+            h = z \dot h_ + (1 - z) \dot h~
+
         References:
             On the Properties of Neural Machine Translation: Encoder–Decoder Approaches
                 http://www.aclweb.org/anthology/W14-4012

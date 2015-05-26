@@ -388,4 +388,24 @@ class Sequential(Model):
             weights = [g['param_{}'.format(p)] for p in range(g.attrs['nb_params'])]
             self.layers[k].set_weights(weights)
         f.close()
-        
+
+
+class GraphModel(Model):
+    """
+    A generic model with arbitrary acyclic graph topology.
+    """
+    def __init__(self):
+        self.layers = []
+        self.params = [] # learnable
+        self.regularizers = [] # same size as params
+        self.constraints = [] # same size as params
+
+
+class EncoderDecoder(Model):
+    """
+    An encoder/decoder model. Encoder is a sequential model, and decoder is also a sequential model.
+    """
+    def __init__(self):
+        self.encoder = Sequential()
+        self.decoder = Sequential()
+
