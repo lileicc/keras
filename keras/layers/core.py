@@ -17,6 +17,11 @@ class Layer(object):
         self.params = []
 
     def connect(self, node):
+        """
+        Connect the input of the current layer to the output of the argument layer.
+
+        :param node: another Layer
+        """
         self.previous = node
 
     def get_output(self, train):
