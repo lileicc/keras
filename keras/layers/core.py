@@ -56,8 +56,14 @@ class Merge(object):
         self.constraints = []
         for m in self.models:
             self.params += m.params
-            self.regularizers += m.regularizers
-            self.constraints += m.constraints
+            if hasattr(m, "regularizers"):
+                self.regularizers += m.regularizers
+            elif hasattr(m, "regularizer"):
+                self.regularizers.append(m.regularizer)
+            if hasattr(m, "constraints"):
+                self.constraints += m.constraints
+            elif hasattr(m, "constraint"):
+                self.constraints.append(m.constraint)
 
     def get_output(self, train=False):
         if self.mode == 'sum':
